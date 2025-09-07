@@ -2,31 +2,104 @@
 :root {
     --primary-color: #1d6392;
     --secondary-color: #2c3e50;
-    --text-color: #333333;;
-    --background-color: #f4f4f4;
     --light-gray: #ecf0f1;
+    
+    /* Modo claro (por defecto) */
+    --bg-color: #f4f4f4;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --button-bg: #1d6392;
+    --button-text: #ffffff;
+    --header-bg: #2c3e50;
+    --profile-section-bg: #ffffff;
+    --section-bg: #f4f4f4;
+    --list-item-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #ccc;
+    --footer-bg: #2c3e50;
+    --shadow: rgba(0,0,0,0.1);
 }
 
+[data-theme="dark"] {
+    /* Modo oscuro */
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+    --border-color: #404040;
+    --button-bg: #0d6efd;
+    --button-text: #ffffff;
+    --header-bg: #1f1f1f;
+    --profile-section-bg: #2d2d2d;
+    --section-bg: #1a1a1a;
+    --list-item-bg: #333333;
+    --input-bg: #333333;
+    --input-border: #555555;
+    --footer-bg: #1f1f1f;
+    --shadow: rgba(255,255,255,0.1);
+}
 
 body {
-    font-family: "inter", sans-serif;
-    line-height: 1.6;
+    font-family: "Roboto Slab", serif;
+    font-size: 18px; /* Aumentado de tamaño base */
+    line-height: 1.7; /* Mejor espaciado */
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
     scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Header mejorado profe */
 .header {
-    background: var(--secondary-color);
+    background: var(--header-bg);
     color: white;
-    padding: 1rem 0;
+    padding: 1.5rem 0; /* Aumenté el padding */
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
     text-align: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Accordion para navegación móvil */
+.accordion-nav {
+    color: white;
+    margin: 0;
+}
+
+.accordion-nav summary {
+    cursor: pointer;
+    font-size: 1.3rem; /* Aumentado */
+    font-weight: bold;
+    padding: 0.8rem 1rem; /* Mejor padding */
+    list-style: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.accordion-nav summary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos cuando el menú está abierto */
+.accordion-nav[open] summary {
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.accordion-nav[open] .nav-list {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .nav-list {
@@ -36,36 +109,85 @@ body {
     display: flex;
     justify-content: center;
     gap: 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
 }
 
 .nav-link {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
 .nav-link:hover {
     color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
 }
 
+/* Ajustar el espaciado de la primera sección */
+.profile-section {
+    padding-top: 180px; /* Aumenté para compensar el header más alto */
+    background-color: var(--profile-section-bg);
+    transition: background-color 0.3s ease;
+}
+
+/* Media Queries para móviles */
+@media (max-width: 768px) {
+    .header {
+        padding: 1.2rem 0;
+    }
+    
+    .accordion-nav summary {
+        font-size: 1.2rem;
+        padding: 0.6rem 1rem;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .profile-section {
+        padding-top: 140px; /* Ajustado para móviles */
+    }
+}
 /* Estilos de secciones */
 .section {
     padding: 80px 20px;
     text-align: center;
+    background-color: var(--section-bg);
+    transition: background-color 0.3s ease;
 }
 
 .profile-section {
-    padding-top: 150px; /* Espacio para el header fijo */
-    background-color: rgb(255, 255, 255);
+    padding-top: 150px;
+    background-color: var(--profile-section-bg);
+    transition: background-color 0.3s ease;
 }
 
 .section-title {
-    font-size: 2.5rem;
-    color: var(--secondary-color);
+    font-family: "Dancing Script", cursive; /* Agregar esta línea */
+    font-size: 3.2rem; /* Aumentado para cursiva */
+    font-weight: 600; /* Agregar peso */
+    color: var(--text-color);
     margin-bottom: 2rem;
     position: relative;
     display: inline-block;
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Agregar sombra */
 }
 
 .section-title::after {
@@ -87,14 +209,33 @@ body {
 }
 
 .profile-name {
-    font-size: 2.5rem;
+    font-family: "Dancing Script", cursive; /* Agregar esta línea */
+    font-size: 3.2rem; /* Aumentado para cursiva */
+    font-weight: 700; /* Más bold para el nombre */
     margin: 0.5rem 0;
-    color: var(--secondary-color);
+    color: var(--text-color);
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Agregar sombra */
 }
 
 .profile-summary {
     max-width: 600px;
     margin: 0 auto 1.5rem;
+    font-size: 1.2rem; /* Aumentado */
+}
+
+.contact-info {
+    font-size: 1.1rem; /* Aumentado */
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--button-bg);
 }
 
 .list, .list-inline {
@@ -104,20 +245,33 @@ body {
 }
 
 .list li {
-    background-color: white;
+    background-color: var(--list-item-bg);
     border-left: 5px solid var(--primary-color);
-    padding: 1rem;
+    padding: 1.2rem; /* Aumentado */
     margin-bottom: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--shadow);
     text-align: left;
+    font-size: 1.1rem; /* Aumentado */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.list li h4 {
+    font-family: "Dancing Script", cursive; /* Agregar esta línea */
+    font-size: 1.5rem; /* Aumentado para cursiva */
+    font-weight: 500; /* Agregar peso */
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
 .list-inline li {
     display: inline-block;
-    background-color: var(--light-gray);
-    padding: 0.5rem 1rem;
+    background-color: var(--card-bg);
+    padding: 0.7rem 1.2rem; /* Aumentado */
     border-radius: 20px;
     margin: 0.5rem;
+    font-size: 1rem; /* Aumentado */
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .skills-container {
@@ -131,26 +285,92 @@ body {
     text-align: center;
 }
 
+.skill-group h3 {
+    font-family: "Dancing Script", cursive; /* Agregar esta línea */
+    font-size: 1.8rem; /* Aumentado para cursiva */
+    font-weight: 500; /* Agregar peso */
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
 /* Linktree Section */
 .linktree-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem; /* Aumenté la separación entre elementos */
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .linktree-link {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     text-decoration: none;
-    padding: 1rem 2rem;
-    width: 250px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    padding: 1.2rem 2rem;
+    width: 280px; /* Ancho fijo para que se vean uniformes */
+    border-radius: 10px; /* Bordes más redondeados */
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    display: block; /* Para que el ancho funcione correctamente */
+    box-shadow: 0 4px 8px var(--shadow);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .linktree-link:hover {
     background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px var(--shadow);
+    border-color: var(--primary-color);
+}
+
+/* Estilos específicos para cada red social */
+.linktree-link:nth-child(2) {
+    /* TikTok - Color negro */
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.linktree-link:nth-child(2):hover {
+    background-color: #333333;
+}
+
+.linktree-link:nth-child(3) {
+    /* Instagram - Gradiente característico */
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    color: #ffffff;
+}
+
+.linktree-link:nth-child(3):hover {
+    background: linear-gradient(45deg, #5a7cfa, #6b60e8, #9747c8, #d63d98, #f14380, #ff3131);
+}
+
+/* Foto de perfil en la sección linktree */
+.linktree-section .profile-photo {
+    width: 150px; /* Más pequeña que la principal */
+    height: 150px;
+    margin-bottom: 1rem;
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+    .linktree-container {
+        gap: 1.5rem;
+        max-width: 300px;
+    }
+    
+    .linktree-link {
+        width: 250px;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .linktree-section .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 /* Contact Form */
@@ -164,51 +384,134 @@ body {
 
 .contact-form input,
 .contact-form textarea {
-    padding: 1rem;
+    padding: 1.2rem; /* Aumentado */
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border);
     border-radius: 5px;
+    font-size: 1rem; /* Aumentado */
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(29, 99, 146, 0.3);
 }
 
 .submit-button {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
-    padding: 1rem;
+    padding: 1.2rem; /* Aumentado */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+    font-size: 1.1rem; /* Aumentado */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit-button:hover {
     background-color: #2980b9;
+    transform: translateY(-2px);
 }
 
 /* Footer */
 .footer {
     text-align: center;
-    padding: 1rem;
-    background-color: var(--secondary-color);
+    padding: 2rem 1rem; /* Aumentado */
+    background-color: var(--footer-bg);
     color: white;
+    font-size: 1rem; /* Aumentado */
+    transition: background-color 0.3s ease;
+}
+
+/* Botón de tema */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 55px; /* Ligeramente más grande */
+    height: 55px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px; /* Aumentado */
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px var(--shadow);
+}
+
+/* Accordion para navegación móvil */
+.accordion-nav {
+    color: white;
+}
+
+.accordion-nav summary {
+    cursor: pointer;
+    font-size: 1.2rem; /* Aumentado */
+    font-weight: bold;
+    padding: 0.5rem;
+    list-style: none;
+}
+
+.accordion-nav[open] summary {
+    margin-bottom: 1rem;
 }
 
 /* Media Queries para responsividad */
 @media (max-width: 768px) {
+    body {
+        font-size: 16px; /* Ajustado para móviles */
+    }
+    
     .nav-list {
         flex-direction: column;
         gap: 0.5rem;
     }
 
     .section {
-        padding: 60px 10px;
+        padding: 60px 15px;
     }
 
     .profile-section {
         padding-top: 120px;
     }
 
+    .section-title {
+        font-size: 2.5rem; /* Ajustado para móviles */
+    }
+
+    .profile-name {
+        font-size: 2.5rem; /* Ajustado para móviles */
+    }
+
+    .profile-summary {
+        font-size: 1.1rem; /* Ajustado para móviles */
+    }
+
     .list li {
         text-align: center;
+        font-size: 1rem; /* Ajustado para móviles */
+    }
+
+    .theme-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+    }
+
+    .skills-container {
+        flex-direction: column;
     }
 }
